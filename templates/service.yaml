@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  selector: #labels used as selectors
+    app: frontend
+    tier: web
+    purpose: deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: {{ .Values.service.nodePort }} # may change

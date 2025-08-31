@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  # these are replicaset labels
+  labels:
+    app: frontend
+    tier: web
+    purpose: deployment
+spec:
+  replicas: {{ .Values.deployment.replicas }} #may change
+  selector:
+  #replicaset use those labels to identify its pods
+    matchLabels:
+      app: frontend
+      tier: web
+      purpose: deployment
+  #pod template
+  template:
+    metadata:
+      # these are pod labels
+      labels:
+        app: frontend
+        tier: web
+        purpose: deployment
+    spec:
+      containers:
+        - name: nginx
+          image: joindevops/frontend:{{ .Values.deployment.imageVersion }} # may change
+          ports:
+            - containerPort: 8080
