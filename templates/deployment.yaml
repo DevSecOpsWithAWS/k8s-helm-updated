@@ -26,6 +26,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: joindevops/frontend:{{ .Values.deployment.imageVersion }} # may change
+          image: nginx:{{ .Values.deployment.imageVersion }} # may change
           ports:
             - containerPort: 8080
